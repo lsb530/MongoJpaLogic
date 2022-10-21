@@ -7,6 +7,7 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+buildDir = 'build'
 
 configurations {
     compileOnly {
@@ -16,6 +17,11 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+    set('snakeyaml.version','1.33')
 }
 
 dependencies {
@@ -40,4 +46,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jar {
+    archiveFileName = 'backbone-plain.jar'
+}
+
+bootJar {
+    archiveFileName = 'backbone.jar'
 }
