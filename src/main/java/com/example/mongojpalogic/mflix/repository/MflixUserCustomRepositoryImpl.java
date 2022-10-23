@@ -7,12 +7,12 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 
-public class MflixCustomRepositoryImpl implements MflixCustomRepository {
+public class MflixUserCustomRepositoryImpl implements MflixUserCustomRepository {
 
     private final MongoTemplate mongoTemplate;
 
     @Lazy
-    public MflixCustomRepositoryImpl(MongoTemplate mongoTemplate) {
+    public MflixUserCustomRepositoryImpl(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 

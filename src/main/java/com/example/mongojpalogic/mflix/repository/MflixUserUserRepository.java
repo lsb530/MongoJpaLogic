@@ -4,6 +4,9 @@ import com.example.mongojpalogic.mflix.document.Users;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface MflixRepository extends MongoRepository<Users, ObjectId>, MflixCustomRepository {
+import java.util.Optional;
 
+public interface MflixUserUserRepository extends MongoRepository<Users, ObjectId>,
+    MflixUserCustomRepository {
+    Optional<Users> findUsersByNameContainingIgnoreCase(String name);
 }
