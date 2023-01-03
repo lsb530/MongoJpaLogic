@@ -13,6 +13,12 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 public class MultipleMongoConfig {
 
     @Primary
+    @Bean(name = "sessionProperties")
+    @ConfigurationProperties(prefix = "spring.data.mongodb.session")
+    public MongoProperties getSessionDbProps() {
+        return new MongoProperties();
+    }
+
     @Bean(name = "mflixProperties")
     @ConfigurationProperties(prefix = "spring.data.mongodb.mflix")
     public MongoProperties getNewDb1Props() {
@@ -26,6 +32,11 @@ public class MultipleMongoConfig {
     }
 
     @Primary
+    @Bean(name = "sessionMongoTemplate")
+    public MongoTemplate sessionMongoTemplate() {
+        return new MongoTemplate(sessionMongoDatabaseFactory(getSessionDbProps()));
+    }
+
     @Bean(name = "mflixMongoTemplate")
     public MongoTemplate mflixMongoTemplate() {
         return new MongoTemplate(mflixMongoDatabaseFactory(getNewDb1Props()));
@@ -37,6 +48,11 @@ public class MultipleMongoConfig {
     }
 
     @Primary
+    @Bean
+    public MongoDatabaseFactory sessionMongoDatabaseFactory(MongoProperties mongo) {
+        return new SimpleMongoClientDatabaseFactory(mongo.getUri());
+    }
+
     @Bean
     public MongoDatabaseFactory mflixMongoDatabaseFactory(MongoProperties mongo) {
         return new SimpleMongoClientDatabaseFactory(mongo.getUri());
