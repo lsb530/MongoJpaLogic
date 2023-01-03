@@ -1,4 +1,4 @@
-package com.example.mongojpalogic.common.config;
+package com.example.mongojpalogic.common.config.var;
 
 import java.time.ZoneId;
 import java.util.TimeZone;
